@@ -6,23 +6,23 @@ and decide what to do with them, to delete them or restore them or keep them qua
 
 # Overview of the code in the folder with the folder heirarchy
 antivirus-lab/
-->antivirus.sh
+|-antivirus.sh
 - scans the directory and checks if there are any malicious files based on some predefined rules
 - if there is a malicious file, it moves it to the quarantine directory
 - it compares the directory-info.last with the directory-info.new if they are different then it scans
-->restor.sh
+|-restor.sh
 - goes through the quarantine directory files
 - asks the user to choose what to do 
-->Makefile
+|-Makefile
 - has a run target (the antivirus), a restore target (the restore tool), and a prepare pre-build step
    that creates malicious_dir if it does not exist. Both targets run prepare first.
-->README.md
-->labtest/
-->quarantine/
+|-README.md
+|-labtest/
+|-quarantine/
   has all the malicious files that has been quarantined
-->directory-info.last/
+|-directory-info.last/
   previous snapshot of the directory 
-->directory-info.new/
+|-directory-info.new/
   current snapshot of the directory
 
 # Prerequisites
