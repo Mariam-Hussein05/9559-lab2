@@ -1,7 +1,7 @@
 #!/bin/bash
 # Usage: ./antivirusd.sh dir malicious_dir interval-secs
 
-#=====antivirusd.sh and restore.sh must not run at the same time=====#
+#=====THIS SCRIPT AND restore.sh MUST NOT RUN AT THE SAME TIME=====#
 exec 9> /tmp/antivirus.lock
 flock -n 9 || { echo "restore.sh or another antivirusd.sh is already running."; exit 1; }
 
