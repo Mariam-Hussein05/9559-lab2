@@ -1,8 +1,12 @@
 #!/bin/bash
 # Usage: ./antivirusd.sh dir malicious_dir interval-secs
 
+#=====THIS SCRIPT AND restore.sh MUST NOT RUN AT THE SAME TIME=====#
+exec 9> /tmp/antivirus.lock
+flock -n 9 || { echo "restore.sh or another antivirusd.sh is already running."; exit 1; }
+
 #=====KEYWOARDS THAT DETECT A MALICIOUS FILE=====#
-flaged_extension=(".exe" ".bat"  ".vbs" ".scr" ".ps1")
+flagged_extension=(".exe" ".bat"  ".vbs" ".scr" ".ps1")
 flagged_content=("virus" "trojan" "malware" "worm" "ransomware")
 
 dir="$1"
@@ -10,7 +14,7 @@ malicious_dir="$2"
 interval_secs="$3"
 
 check_malicious(){
-    for i in "${flaged_extension[@]}"; do
+    for i in "${flagged_extension[@]}"; do
         [[ $1 == *"$i" ]] && return 0      
     done
     for j in "${flagged_content[@]}"; do
@@ -23,7 +27,7 @@ scan(){
     for f in "$dir"/*; do
         if check_malicious "$f"; then
             name=$(basename "$f") #here it cuts everthing before the last / and returns the name of the file
-            echo " $name is malicious and it is DELETED"
+            echo "$name is malicious and it is DELETED"
             mv "$f" "$malicious_dir/$name"
         fi
     done
@@ -37,7 +41,6 @@ fi
 
 while true; do
     sleep "$interval_secs"
-    scan
     ls -l "$dir" > directory-info.new
     if ! cmp -s directory-info.last directory-info.new; then
         scan
