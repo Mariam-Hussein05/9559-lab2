@@ -26,8 +26,10 @@ antivirus-lab/
 
 |-quarantine/ 
   has all the malicious files that has been quarantined
+  
 |-directory-info.last/ 
   previous snapshot of the directory 
+  
 |-directory-info.new/ 
   current snapshot of the directory
 
