@@ -1,4 +1,4 @@
-DIR = labtestfolder
+DIR = labtest
 MALICIOUS_DIR = quarantine
 INTERVAL = 10
 
