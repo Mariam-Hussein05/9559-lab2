@@ -35,7 +35,6 @@ antivirus-lab/
 
 # Prerequisites
 **Install make to be able to run the makefile**
-
 sudo apt update
 sudo apt install make
 **If flock is ever missing, it comes from the util-linux package**
