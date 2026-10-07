@@ -30,7 +30,7 @@ while [ -n "$(ls -A "$malicious_dir")" ]; do
         mv "$malicious_dir/$name" "$dir"
         
         echo "Restored $name to $dir"
-    elif [ "$choice" == "2"]
+    elif [ "$choice" == "2" ]
     then
         rm "$malicious_dir/$name"
         echo "$name permanently deleted"
