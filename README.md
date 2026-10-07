@@ -34,11 +34,19 @@ antivirus-lab/
   current snapshot of the directory
 
 # Prerequisites
-**Install make to be able to run the makefile**
+## Prerequisites
+
+**Install make to be able to run the Makefile**
+
+```bash
 sudo apt update
 sudo apt install make
-**If flock is ever missing, it comes from the util-linux package**
+```
 
+**If `flock` is ever missing, it comes from the `util-linux` package**
+
+```bash
 sudo apt install util-linux
+```
 
 # Step-by-step instructions for running the antivirus and restore tools 
