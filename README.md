@@ -20,9 +20,9 @@ antivirus-lab/
 - has a run target (the antivirus), a restore target (the restore tool), and a prepare pre-build step
    that creates malicious_dir if it does not exist. Both targets run prepare first.
 
-|-README.md 
-|-labtest/ 
-|-quarantine/ 
+|-README.md /n
+|-labtest/ /n
+|-quarantine/ /n 
   has all the malicious files that has been quarantined
 |-directory-info.last/ 
   previous snapshot of the directory 
