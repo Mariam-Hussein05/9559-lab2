@@ -6,6 +6,7 @@
 exec 9> /tmp/antivirus.lock
 flock -n 9 || { echo "restore.sh or antivirusd.sh is already running."; exit 1; }
 
+cd "$(dirname "$0")"
 #=====KEYWORDS THAT DETECT A MALICIOUS FILE=====#
 flagged_extension=(".exe" ".bat" ".vbs" ".scr" ".ps1")
 flagged_content=("virus" "trojan" "malware" "worm" "ransomware")
