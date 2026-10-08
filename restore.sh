@@ -28,8 +28,8 @@ while [ -n "$(ls -A "$malicious_dir")" ]; do
     if [ "$choice" == "1" ]
     then
         mv "$malicious_dir/$name" "$dir"
-        
         echo "Restored $name to $dir"
+        echo "$name" >> whitelist.txt
     elif [ "$choice" == "2" ]
     then
         rm "$malicious_dir/$name"
