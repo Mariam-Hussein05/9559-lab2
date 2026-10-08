@@ -14,6 +14,10 @@ malicious_dir="$2"
 interval_secs="$3"
 
 check_malicious(){
+    fname=$(basename "$1")
+    if grep -qx "$fname" whitelist.txt; then
+        return 1
+    fi
     for i in "${flagged_extension[@]}"; do
         [[ $1 == *"$i" ]] && return 0      
     done
