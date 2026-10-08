@@ -67,4 +67,12 @@ this creates a quarantine directory if need and then runs antivirus.sh labtest q
 the first interval should echo "dangerous.txt is malicious and it is Deleted"
 
 5. press ctrl+c then go to quarantine to check if the file is moved there or not and check if it is deleted from labtest
-6. run "make restore" and you will the see the malicious file displayed and ask you what you want to do with it
+6. run "make restore" and you will the see the malicious file displayed and ask you what you want to do with it.
+   this tool stops when quarantine is empty
+
+# Where the flagged-extension and flagged-keywords defined
+at the top of the antivirus.sh file 
+```bash
+flagged_extension=(".exe" ".bat"  ".vbs" ".scr" ".ps1")
+flagged_content=("virus" "trojan" "malware" "worm" "ransomware")
+```
