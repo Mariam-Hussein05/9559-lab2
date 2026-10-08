@@ -130,3 +130,24 @@ This prints your cron list, and your line should appear.
 31 0 * * 5 [ "$(date +\%d)" -ge 15 ] && [ "$(date +\%d)" -le 21 ] && /home/mariam-yamen/antivirus-lab/antivirus-cron.sh /home/mariam-yamen/antivirus-lab/labtest /home/mariam-yamen/antivirus-lab/quarantine >> /home/mariam-yamen/antivirus-lab/antivirus-cron.log 2>&1
 - "31 0 * * 5" means 31 minutes, 0 hour, any day of the month ,any month, 5th day of the week (Friday). I didn't use 31 0 15-21 * 5 because cron works differently, here it will either work between 15-21 or at the 5th day of the week not when both terms matches. so I did the next step
 - "[ "$(date +\%d)" -ge 15 ] && [ "$(date +\%d)" -le 21 ]" first it will capture the day of the monthas a text and check if its greater than or equal to 15    AND less than or equal to 21, if both tests passed it will run the script
+
+# Bonus 2: Whitelist
+**where is whitelist stored**
+   it is stored as a text file in the antivirus-lab directory
+**How a file gets added to the whitelist**
+   1. an antivirusd.sh quarantine a malicious file
+   2. the user tells the restore.sh to restore the file(false positive)
+   3. at the restore.sh it move back the file and adds the file name at the whitelist.txt
+   4. the antivirus.sh scans the directory, when it detects the malicious file again it checks the whitelist, it finds the file at the whitelist.txt so it ignores it and doesn't quarantine it
+** how the daemon checks it during a scan**
+   antivirusd.sh and antivirus-cron.sh check the whitelist first, at the top of the check_malicious function, before any extension or keyword rule:
+   ```bash
+   fname=$(basename "$1")
+   if grep -qx "$fname" whitelist.txt; then
+       return 1
+   fi
+   ```
+- basename "$1" gets the file name without its folder.
+- grep -x only matches a whole line, so a.exe does not match data.exe.
+- If the name is found, the function returns 1 ("not malicious") right away, so the file is skipped. It is not printed, moved or deleted.
+- If the name is not found, the normal extension and keyword checks run.
