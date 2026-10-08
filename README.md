@@ -99,6 +99,11 @@ the script should be executable
    crontab -e
 ```
 choose nano
-3. add the job : 
 
-   * * * * * sleep 23; /home/user/antivirus-lab/antivirus-cron.sh /home/user/antivirus-lab/labtestfolder /home/user/antivirus-lab/quarantine >> /home/user/antivirus-lab/antivirus-cron.log 2>&1
+3. add the job :
+
+go to the very bottom of the file and write this as a single line
+```bash
+  * * * * * sleep 23; /home/user/antivirus-lab/antivirus-cron.sh /home/user/antivirus-lab/labtestfolder /home/user/antivirus-lab/quarantine >> /home/user/antivirus-lab/antivirus-cron.log 2>&1
+```
+
