@@ -51,5 +51,20 @@ sudo apt install util-linux
 
 # Step-by-step instructions for running the antivirus and restore tools 
 1. Open the terminal
-2. create a monitored folder and add some files on it
+2. create a monitored folder and add some files on it 
+```bash
+mkdir labtest
+cd labtest
+nano first.txt
+```
+write in the first.txt "hello there is is a lab test"
+3. start the anitvirus 
+```bash
+make
+```
+this creates a quarantine directory if need and then runs antivirus.sh labtest quarantine 10. 
+4. to test this open another terminal and make another file(dangerous.txt) and insert test "this file has a virus"
+the first interval should echo "dangerous.txt is malicious and it is Deleted"
 
+5. press ctrl+c then go to quarantine to check if the file is moved there or not and check if it is deleted from labtest
+6. run "make restore" and you will the see the malicious file displayed and ask you what you want to do with it
