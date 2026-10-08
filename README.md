@@ -106,4 +106,27 @@ go to the very bottom of the file and write this as a single line
 ```bash
   * * * * * sleep 23; /home/user/antivirus-lab/antivirus-cron.sh /home/user/antivirus-lab/labtestfolder /home/user/antivirus-lab/quarantine >> /home/user/antivirus-lab/antivirus-cron.log 2>&1
 ```
+- " * * * * *" means it runs every minute
+- waits 23 seconds first
+- /home/.../antivirus-cron.sh the script to run
+- /home/.../labtest	the folder to monitor (the dir argument)
+- /home/.../quarantine	the quarantine folder (the malicious_dir argument)
+- >> .../antivirus-cron.log 2>&1	save everything the script prints into a log file
 
+4. save and close
+5. check it was saved
+   ```bash
+   crontab -l
+   ```
+This prints your cron list, and your line should appear.
+
+6. Test it add a malicious file
+7. go to
+    ```bash
+   cat antivirus-cron.log
+   ```
+   you will see that it deleted the malicious file and you can make sure by going to quarantine
+**cron expression should be to run this scan every 3rd Friday of the month at 12:31 am**
+31 0 * * 5 [ "$(date +\%d)" -ge 15 ] && [ "$(date +\%d)" -le 21 ] && /home/mariam-yamen/antivirus-lab/antivirus-cron.sh /home/mariam-yamen/antivirus-lab/labtest /home/mariam-yamen/antivirus-lab/quarantine >> /home/mariam-yamen/antivirus-lab/antivirus-cron.log 2>&1
+- "31 0 * * 5" means 31 minutes, 0 hour, any day of the month ,any month, 5th day of the week (Friday). I didn't use 31 0 15-21 * 5 because cron works differently, here it will either work between 15-21 or at the 5th day of the week not when both terms matches. so I did the next step
+- "[ "$(date +\%d)" -ge 15 ] && [ "$(date +\%d)" -le 21 ]" first it will capture the day of the monthas a text and check if its greater than or equal to 15    AND less than or equal to 21, if both tests passed it will run the script
