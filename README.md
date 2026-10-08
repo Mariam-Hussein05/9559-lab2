@@ -50,4 +50,6 @@ sudo apt install util-linux
 ```
 
 # Step-by-step instructions for running the antivirus and restore tools 
+1- Open the terminal
+2- create a monitored folder and add some files on it
 
