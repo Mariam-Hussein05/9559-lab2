@@ -76,3 +76,29 @@ at the top of the antivirus.sh file
 flagged_extension=(".exe" ".bat"  ".vbs" ".scr" ".ps1")
 flagged_content=("virus" "trojan" "malware" "worm" "ransomware")
 ```
+# Bonus 1: Cron Job
+antivirus-cron.sh dir malicious_dir does the same scan and quarantine as antivirusd.sh, but it runs one pass and exits. Cron runs it on a schedule, so there is no loop and no sleep.
+**Prerequisites**
+- Install the cron service and run it
+ ```bash
+sudo apt update
+sudo apt install cron
+sudo systemctl enable --now cron
+systemctl status cron
+```
+the status should say "active (runnning)
+
+the script should be executable 
+```bash
+  chmod +x antivirus-cron.sh
+```
+**Step by step configuration
+1. get full path of the antivirus-lab "pwd"
+2. open the crontab
+```bash
+   crontab -e
+```
+choose nano
+3. add the job : 
+
+   * * * * * sleep 23; /home/user/antivirus-lab/antivirus-cron.sh /home/user/antivirus-lab/labtestfolder /home/user/antivirus-lab/quarantine >> /home/user/antivirus-lab/antivirus-cron.log 2>&1
