@@ -133,13 +133,17 @@ This prints your cron list, and your line should appear.
 
 # Bonus 2: Whitelist
 **where is whitelist stored**
+
    it is stored as a text file in the antivirus-lab directory
 **How a file gets added to the whitelist**
+
    1. an antivirusd.sh quarantine a malicious file
    2. the user tells the restore.sh to restore the file(false positive)
    3. at the restore.sh it move back the file and adds the file name at the whitelist.txt
    4. the antivirus.sh scans the directory, when it detects the malicious file again it checks the whitelist, it finds the file at the whitelist.txt so it ignores it and doesn't quarantine it
+      
 **how the daemon checks it during a scan**
+
    antivirusd.sh and antivirus-cron.sh check the whitelist first, at the top of the check_malicious function, before any extension or keyword rule:
    ```bash
    fname=$(basename "$1")
